@@ -1,0 +1,172 @@
+.logo {
+    border-radius: 15px;
+}
+
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    margin: 0;
+}
+
+.current-auth-text {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.error-message {
+    color: rgb(220, 79, 79);
+    font-family: Inter, sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.auth-option-button {
+    background-color: transparent; /* Makes the button transparent */
+    border: none; /* Removes default border */
+    outline: none; /* Removes default outline */
+    padding: 10px 20px; /* Add padding for button size */
+    color: gray; /* Set text color */
+    border-bottom: 3px solid rgb(230, 230, 230); /* Add a blue bottom outline */
+    cursor: pointer; /* Change cursor to a pointer on hover */
+    font-size: 20px;
+    width: 100%;
+}
+
+.auth-option-button:hover {
+    color: rgb(50, 50, 50);
+    border-bottom: 3px solid rgb(200, 200, 200);
+}
+
+.auth-option-button-selected {
+    background-color: transparent; /* Makes the button transparent */
+    border: none; /* Removes default border */
+    outline: none; /* Removes default outline */
+    padding: 10px 20px; /* Add padding for button size */
+    cursor: pointer; /* Change cursor to a pointer on hover */
+    font-size: 20px;
+    width: 100%;
+
+    color: #007bff!important;
+    border-bottom: 3px solid #007bff!important;
+}
+
+.auth-option-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+body {
+    background-color: rgb(233, 233, 233);
+}
+
+.auth-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.authbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-arrow {
+    width: 30px;
+    height: 30px;   
+}
+
+.fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 40px;
+    padding-right: 15px;
+    padding-bottom: 40px;
+    padding-left: 15px;
+    background-color: white;
+    border-radius: 10px;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.input-field {
+    background: rgb(249, 249, 249);
+
+    outline: none;
+    border-radius: 10px;
+    border: solid rgb(200, 200, 200) 2px;
+    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    padding-left: 10px;
+
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 100%;
+
+    transition: all 0.1s ease-in-out;
+    padding: 10px;
+}
+
+.input-field:hover {
+    border: solid #06D602 2px;
+}
+
+.input-field::placeholder {
+    color: #aaa;
+}
+
+.commit-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(to bottom, #05eb01, #049b01);
+    outline: none;
+    border: none;
+    border-radius: 6px;
+
+    transition: all 0.1s ease-in-out;
+    padding: 5px;
+    width: 100%;
+}
+
+.commit-button:hover {
+    background: linear-gradient(to bottom, #32b100, #1f6d00);
+}
+
+
+.button-text {
+    color: white;
+    font-size: 20px;
+}
+
+.main-text {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}

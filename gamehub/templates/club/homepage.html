@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block links %}
+	<link rel="stylesheet" href="{% static 'css/includes/header.css' %}">
+	<link rel="stylesheet" href="{% static 'css/includes/club_card.css' %}">
+	<link rel="stylesheet" href="{% static 'css/includes/clubs.css' %}">
+  <script src="{% static 'js/includes/homepage.js' %}"></script>
+{% endblock links %}
+
+{% block header %}
+	{% include "includes/header.html" %}
+{% endblock header %}
+
+{% block main %}
+  <style>
+    main {
+      padding-top: 2rem;
+    }
+  </style>
+{% include "includes/clubs.html" %}
+{% endblock main %}

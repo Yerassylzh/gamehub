@@ -1,0 +1,205 @@
+.dropdown {
+    position: relative;
+    white-space: nowrap;
+}
+
+.dropdown-content-option-button {
+    font-size: 15px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    outline: none;
+    background: transparent;
+    color: rgb(60, 60, 60);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-content-option-button:hover {
+    color: black;
+}
+
+.dropdown-content-option-img {
+    width: 30px;
+    height: 30px;
+}
+
+.dropdown-content-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 0.5rem;
+}
+
+.username-button {
+    background: transparent;
+    border: none;
+    outline: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-button {
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent;
+
+    border-radius: 20%;
+}
+
+
+.dropdown-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+
+    position: absolute;
+    top: calc(100% + 2.25rem);
+    right: 0;
+    z-index: 2;
+
+    padding: 1rem;
+    border-radius: 1rem;
+
+    background-color: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+    transform: translateY(-0.75rem);
+
+    opacity: 0;
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+
+    pointer-events: none; 
+
+    gap: 0.5rem;
+}
+
+.dropdown.active > button + .dropdown-content {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.logout-btn:hover {
+  background-color: rgb(220, 0, 0);
+}
+
+.square-img {
+    aspect-ratio: 1 / 1;
+}
+
+.settings-bar {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    position: absolute;
+}
+
+.settings-option-button {
+    border: none;
+    outline: none;
+
+    background: transparent;
+}
+
+.settings-option-text {
+    padding: 0;
+    margin: 0;
+    font-size: calc(0.575rem + 0.4vw);
+}
+
+.visible {
+    display: flex;
+}
+
+.not-visible {
+    display: none;
+}
+
+.username-text {
+    padding: 0;
+    margin: 0;
+    font-size: calc(0.575rem + 0.4vw)
+}
+
+.personal-data {
+    display: flex;
+    flex-direction: row;
+
+    gap: 4%;
+
+    margin: 0;
+    padding: 0;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    padding-right: 5%;
+}
+
+.homepage-link {
+    text-decoration: none;
+    
+    gap: 2%;
+
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+}
+
+.logo-and-name-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    margin: 0;
+    padding: 0;
+
+    padding-left: 2%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.gamehub-text {
+    background: linear-gradient(45deg, rgb(40, 40, 40), rgb(60, 60, 60)); /* Define the gradient colors */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -webkit-text-fill-color: transparent;
+
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: calc(1rem + 0.7vw);
+
+    text-decoration: none;
+
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

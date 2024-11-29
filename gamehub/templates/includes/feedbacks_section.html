@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="content-section-wrapper">
+  <p class="content-title">Отзывы</p>
+  <div class="content-section">
+    <div class="row">
+      {% for feedback in feedbacks %}
+        <div class="col-5 col-md-4 col-xl-3">
+          <p class="feedback-name">{{ feedback.name }}</p>
+          
+          <div class="rating-wrapper">
+            {% for _ in feedback.full_star_inds %}
+            <div class="col-1 col-md-1 col-xl-1">
+              <img src="{% static 'img/star_full.png' %}" class="star img-fluid">
+            </div>
+            {% endfor %}
+        
+            {% for _ in feedback.empty_star_inds %}
+              <div class="col-1 col-md-1 col-xl-1">
+                <img src="{% static 'img/star_empty.png' %}" class="star img-fluid">
+              </div>
+            {% endfor %}
+          </div>
+
+          <p class="feedback-date">{{ feedback.date }}</p>
+
+          <p class="feedback-text">{{ feedback.text }}</p>
+        </div>
+      {% empty %}
+        <p class="no-feedback">Станьте первым!</p>
+      {% endfor %}
+    </div>
+  </div>
+  <button class="create-feedback" id="create-feedback">Оставить отзыв</button>
+</div>

@@ -1,0 +1,51 @@
+{% load static %}
+
+<div class="row header">
+	<div class="col-5 col-md-5 col-xl-5 logo-and-name-wrapper">
+		<a href="{% url "club:homepage" %}" class="homepage-link">
+      <div class="col-2 col-md-1 col-xl-1">
+        <img src="{% static "img/gamehub.png" %}" class="img-fluid logo"> 
+      </div>
+			<p class="gamehub-text">GameHub</p>
+		</a>
+	</div>
+	<div class="col-5 col-md-4 col-xl-3 personal-data">
+		<div class="col-3 col-md-2 col-xl-2">
+			{% if has_personal_image %}
+				<img src="personal_image.image.url" class="img-fluid" />
+			{% else %}
+				<img src="{% static 'img/unknown.png' %}" class="img-fluid" />
+			{% endif %}
+		</div>
+    <p class="username-text" id="username-text">{{ username }}</p>
+    
+    <div class="col-1 col-md-1 col-xl-1">
+      <div class="dropdown" data-dropdown>
+        <button class="dropdown-button" data-dropdown-button id="dropdown-button">
+          <img src="{% static 'img/menu.png' %}" class="img-fluid square-img" data-dropdown-button-img/>
+        </button>
+        <div class="dropdown-content">
+          {% for dropdown_content_option in dropdown_content_options %}
+            <div class="dropdown-content-option">
+              <img src="{% static 'img/'|add:dropdown_content_option.img_name %}" class="dropdown-content-option-img">
+              <button class="dropdown-content-option-button" id="{{ dropdown_content_option.button_id }}">{{ dropdown_content_option.text }}</button>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+	  </div>
+  </div>
+
+  <style>
+    .header {
+      margin: 0!important;
+    }
+  </style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+    let CSRF_TOKEN = "{{ csrf_token }}"
+    let HOMEPAGE_URL = "{% url 'club:homepage' %}"
+    let MYBOOKINGS_URL = "{% url 'club:my_bookings' %}"
+  </script>
+</div>

@@ -1,0 +1,15 @@
+<div class="row clubs-wrapper">
+	{% for club in clubs %}
+		<div class="col-8 col-md-5 col-xl-5">
+			{% include "includes/club_card.html" %}
+		</div>
+	{% endfor %}
+	<style>
+		.clubs-wrapper {
+			margin-left: 18%;
+			margin-right: 18%;
+			display: flex;
+			justify-content: space-evenly;
+		}
+	</style>
+</div>
