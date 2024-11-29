@@ -1,0 +1,294 @@
+[
+{
+  "model": "club.club",
+  "pk": 1,
+  "fields": {
+    "name": "TRUE GAMERS Магадан",
+    "description": "TRUE GAMERS - кибер-арена, из которой тебе НЕ ЗАХОЧЕТСЯ уходить. Проверим?\r\n\r\nУ нас вы найдете:\r\n\r\nНесколько зон с мощнейшими компами\r\nТоповые девайсы от HyperX\r\nГеймерская зона PS c сочными телевизорами\r\nКресла от DxRacer\r\n\r\nОткрыты 24/7! Бронируйте по телефону.",
+    "price": "120 рублей в час",
+    "number_of_computers": 20
+  }
+},
+{
+  "model": "club.club",
+  "pk": 2,
+  "fields": {
+    "name": "TRUE GAMERS Переславль-Залесский",
+    "description": "TRUE GAMERS - кибер-арена, из которой тебе НЕ ЗАХОЧЕТСЯ уходить.",
+    "price": "60 рублей в час",
+    "number_of_computers": 30
+  }
+},
+{
+  "model": "club.club",
+  "pk": 3,
+  "fields": {
+    "name": "120FPS",
+    "description": "120FPS - кибер-бар, в котором ты сможешь ощутить максимальный уровень комфорта!\r\n\r\nУ нас вы найдете:\r\n· PS5 с сочными ТВ 120 герц (диагональ от 55 до 85 дюймов)\r\n· Закрытые и открытые зоны\r\n· Популярные и новые игры\r\n· Настольные игры\r\n· Еду и напитки\r\n\r\nПриходи, мы ждём тебя!",
+    "price": "349 руб в час",
+    "number_of_computers": 100
+  }
+},
+{
+  "model": "club.club",
+  "pk": 4,
+  "fields": {
+    "name": "MEGADROM Стахановская",
+    "description": "МЕГАДРОМ – это компьютерный клуб с премиум девайсами, мощными ПК и крутой атмосферой!\r\n\r\nНаша киберарена это:\r\n● Процессоры Intel Core i5 11400F \r\n● Топовая периферия от RAZER&DARK PROJECT\r\n● 3 игровые зоны и PS5\r\n● Регулярные турниры (Dota, CS:GO)\r\n\r\nРаботаем круглосуточно! Залетай в наш киберспортивный, игровой клуб!\r\n\r\nПриходи по адресу: г. Екатеринбург, ул.Стахановская улица, 34\r\nДля бронирования звони по телефону: +73432264978",
+    "price": "60 рублей в час",
+    "number_of_computers": 20
+  }
+},
+{
+  "model": "club.club",
+  "pk": 5,
+  "fields": {
+    "name": "BLACKOPS cyber club",
+    "description": "BlackOps - Киберспортивный клуб, оснащен мощным железом для современных геймеров, уютными игровыми зонами для индивидуальной или командной игры.\r\n\r\nНаши преимущества:\r\n\r\n✅ Самые мощные компы на процессорах i5 и i7 последних поколений, оперативной памятью ddr5, и мощными видеокартами 3070 и 4070\r\n\r\n✅ Удобный, продуманные игровые столы, кронштейны на всех мониторах, кресла DxRacer, и надежные девайсы для максимального комфорта в играх\r\n\r\n✅ Комфортные просторные игровые зоны с ПК, зонированная обстановка позволяет максимально избежать шума от других комнат, администраторы следят за уровнем шума во всем клубе\r\n\r\n✅ Отдельная VIP-зона (Закрытые комнаты) с огромным 75 дюймовыми телевизором и PlayStation 5, где можно не только играть, но смотреть трансляции или фильмы\r\n\r\n✅ Современная, мощная система вентиляции для максимального комфортного нахождения в помещении долгое время, так же у нас можно курить электронные сигареты\r\n\r\n✅ Большой ассортимент напитков и снеков не заставят геймера отвлекаться от игр долгое время\r\n\r\n✅ Удобное местоположение - нас легко найти, остановка общественного транспорта и парковка в двух шагах\r\n\r\nПриходи и оцени сам лучшее игровое пространство в городе!",
+    "price": "110 рублей в час",
+    "number_of_computers": 100
+  }
+},
+{
+  "model": "club.contact",
+  "pk": 1,
+  "fields": {
+    "address": "улица Пушкина, 8, Магадан, Россия",
+    "phone_number": "+7 (914) 038-89-88",
+    "email": "info@truegamers.ru",
+    "club": 1
+  }
+},
+{
+  "model": "club.contact",
+  "pk": 2,
+  "fields": {
+    "address": "улица 50 лет Комсомола, 16Б, Переславль-Залесский, Ярославская область, Россия",
+    "phone_number": "+7 (960) 544-00-44",
+    "email": "info@truegamers.ru",
+    "club": 2
+  }
+},
+{
+  "model": "club.contact",
+  "pk": 3,
+  "fields": {
+    "address": "Стахановская улица, 34, Екатеринбург, Россия",
+    "phone_number": "+73432264978",
+    "email": "example@ex.com",
+    "club": 3
+  }
+},
+{
+  "model": "club.contact",
+  "pk": 4,
+  "fields": {
+    "address": "улица Островского, 9, Дудинка, Россия",
+    "phone_number": "+79786700076",
+    "email": "blackops.2000@mail.ru",
+    "club": 4
+  }
+},
+{
+  "model": "club.contact",
+  "pk": 5,
+  "fields": {
+    "address": "улица 78-й Добровольческой Бригады, 26, Красноярск, Россия",
+    "phone_number": "+79235720120",
+    "email": "120fps.krsk@mail.ru",
+    "club": 5
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 1,
+  "fields": {
+    "image": "uploads/165848197662da6d38a51e1_yRcWBXJ.webp",
+    "club": 1
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 2,
+  "fields": {
+    "image": "uploads/165848197662da6d389f5e3_t5r7u1i.webp",
+    "club": 1
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 3,
+  "fields": {
+    "image": "uploads/1630259035612bc75b71a0fmD-_me-ljhc_V8IGqLQ.webp",
+    "club": 2
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 4,
+  "fields": {
+    "image": "uploads/1630259035612bc75b68346hFZLuuCgzVA_wzww88C.webp",
+    "club": 2
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 5,
+  "fields": {
+    "image": "uploads/1630259035612bc75bb0d36HPH1iiY7TIQ_KpqiY8t.webp",
+    "club": 2
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 6,
+  "fields": {
+    "image": "uploads/1630259035612bc75bd7caa8MLZ6dUIIT0.webp",
+    "club": 2
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 7,
+  "fields": {
+    "image": "uploads/170231332065773d688d984_aCpOU8N.webp",
+    "club": 3
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 8,
+  "fields": {
+    "image": "uploads/170231332065773d688fd14_pjBvTkz.webp",
+    "club": 3
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 9,
+  "fields": {
+    "image": "uploads/170231332165773d6904b87_3AWiTJc.webp",
+    "club": 3
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 10,
+  "fields": {
+    "image": "uploads/170231332165773d6908e27_c5D55Qr.webp",
+    "club": 3
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 11,
+  "fields": {
+    "image": "uploads/171040570165f2b845778fe_9W4mjS1.webp",
+    "club": 4
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 12,
+  "fields": {
+    "image": "uploads/171040571465f2b852d8ac4_YaMTZzk.webp",
+    "club": 4
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 13,
+  "fields": {
+    "image": "uploads/171040571465f2b852db9fb.webp",
+    "club": 4
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 14,
+  "fields": {
+    "image": "uploads/171040571465f2b852de266.webp",
+    "club": 4
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 15,
+  "fields": {
+    "image": "uploads/172211244266a559baaedb8_DvikwvM.webp",
+    "club": 5
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 16,
+  "fields": {
+    "image": "uploads/172211245166a559c305d6c_KlsV0LJ.webp",
+    "club": 5
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 17,
+  "fields": {
+    "image": "uploads/172211245766a559c935fb4_eV2Dug9.webp",
+    "club": 5
+  }
+},
+{
+  "model": "club.galleryimage",
+  "pk": 18,
+  "fields": {
+    "image": "uploads/172211246566a559d1ab7f1.webp",
+    "club": 5
+  }
+},
+{
+  "model": "club.mainimage",
+  "pk": 1,
+  "fields": {
+    "image": "uploads/165848197662da6d38a2bf9_J4Ovl0e.webp",
+    "club": 1
+  }
+},
+{
+  "model": "club.mainimage",
+  "pk": 2,
+  "fields": {
+    "image": "uploads/1630259035612bc75b7f548s3JGqNuO2gc_dZETEHO.webp",
+    "club": 2
+  }
+},
+{
+  "model": "club.mainimage",
+  "pk": 3,
+  "fields": {
+    "image": "uploads/170231331865773d66d68a7_9RzIb8v.webp",
+    "club": 3
+  }
+},
+{
+  "model": "club.mainimage",
+  "pk": 4,
+  "fields": {
+    "image": "uploads/171040570165f2b8457774d_1Vcuqzw.webp",
+    "club": 4
+  }
+},
+{
+  "model": "club.mainimage",
+  "pk": 5,
+  "fields": {
+    "image": "uploads/172211242366a559a7eb26f_xVuTb9a.webp",
+    "club": 5
+  }
+},
+{
+  "model": "club.user",
+  "pk": 1,
+  "fields": {
+    "username": "__yerazh__",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+  }
+}
+]

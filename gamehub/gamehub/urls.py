@@ -17,7 +17,6 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if gamehub.settings.DEBUG:
     import debug_toolbar
-    print("Added debug toolbar")
 
     urlpatterns += [
         path(
