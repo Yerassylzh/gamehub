@@ -100,6 +100,105 @@
   }
 },
 {
+  "model": "club.feedback",
+  "pk": 2,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "Test feedback",
+    "rating": 5,
+    "date": "2024-12-01",
+    "club": 4
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 3,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "fsdfsdf",
+    "rating": 5,
+    "date": "2024-12-01",
+    "club": 4
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 4,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "fjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdfffffffffffffff",
+    "rating": 3,
+    "date": "2024-12-01",
+    "club": 4
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 5,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "fsldjfskdlfjsdlfjkkkkk",
+    "rating": 5,
+    "date": "2024-12-01",
+    "club": 4
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 6,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "fsdfffffffffffffffffff",
+    "rating": 5,
+    "date": "2024-12-01",
+    "club": 4
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 7,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "",
+    "rating": 5,
+    "date": "2024-12-01",
+    "club": 4
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 8,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "fsdffffffffffffff",
+    "rating": 5,
+    "date": "2024-12-01",
+    "club": 1
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 9,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "fsdfsdfsd",
+    "rating": 0,
+    "date": "2024-12-01",
+    "club": 1
+  }
+},
+{
+  "model": "club.feedback",
+  "pk": 10,
+  "fields": {
+    "name": "__yerazh__",
+    "text": "",
+    "rating": 3,
+    "date": "2024-12-01",
+    "club": 1
+  }
+},
+{
   "model": "club.galleryimage",
   "pk": 1,
   "fields": {
@@ -285,7 +384,7 @@
 },
 {
   "model": "club.user",
-  "pk": 1,
+  "pk": 2,
   "fields": {
     "username": "__yerazh__",
     "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"

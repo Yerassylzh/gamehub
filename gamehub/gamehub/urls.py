@@ -3,7 +3,6 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 
-import gamehub
 import club.urls
 import authpage.urls
 
@@ -15,7 +14,7 @@ urlpatterns = [
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if gamehub.settings.DEBUG:
+if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns += [

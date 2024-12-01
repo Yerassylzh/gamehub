@@ -1,1 +1,52 @@
-{% include 'includes/authfields.html' %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block links %}
+	<link rel="stylesheet" href="{% static 'css/authpage/authpage.css' %}">
+{% endblock %}
+
+{% block main %}
+	<div class="row authbar">
+		<div class="col-8 col-md-5 col-xl-4 fields-wrapper">
+			<div class="col-4 col-md-4 col-xl-4 logo-wrapper">
+				<img src="{% static 'img/gamehub.png' %}" alt="logo" class="img-fluid logo">
+			</div>
+
+				<p class="main-text">
+					Gamehub
+				</p>
+
+				<p class="current-auth-text" id="current-auth-text">Вход</p>
+
+			<div class="auth-option-wrapper" name="auth-option-wrapper" id="auth-type-wrapper" auth_type="0">
+				<button class="auth-option-button-selected" data-auth-type="login" name="auth-option-login" id="auth-login">Вход</button>
+				<button class="auth-option-button" data-auth-type="signup" name="auth-option-signup" id="auth-signup">Регистрация</button>
+			</div>
+
+			<div class="auth-form" id="auth-form" name="auth-form">
+				{{ form.username }}
+				{{ form.password }}
+				<div style="display: flex; flex-direction: row; width: 100%; justify-content: flex-start; padding-left: 1%; gap: 2%;">
+					{{ form.remember_me }}
+					{{ form.remember_me.label }}
+				</div>
+
+				{% if error_message %}
+					<p class="error-message">{{ error_message }}</p>
+				{% endif %}
+
+				<button name="commit-button" class="commit-button" id="auth-submit" type="submit">
+					<p class="button-text">Продолжить</p>
+					<img src="{% static 'img/right_arrow.png' %}" alt="->" class="right-arrow" id="login-status">
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    let CSRF_TOKEN = "{{ csrf_token }}"
+    let AUTHPAGE_URL = "{% url 'authpage:authpage' %}"
+	</script>
+  <script src="{% static 'js/authpage/authpage.js' %}"></script>
+{% endblock %}

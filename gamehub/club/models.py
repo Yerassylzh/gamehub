@@ -75,6 +75,12 @@ class Contact(models.Model):
 
 
 class Feedback(models.Model):
+    name = models.CharField(
+        verbose_name="Автор",
+        name="name",
+        max_length=255,
+    )
+
     text = models.TextField(
         verbose_name="описание отзыва",
         name="text",

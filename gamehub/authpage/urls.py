@@ -1,9 +1,9 @@
-from django.urls import path, include
+from django.urls import path
 
 from authpage import views
 
 app_name = "authpage"
 
 urlpatterns = [
-    path("", views.auth, name="authpage"),
+    path("", views.AuthpageView.as_view(), name="authpage"),
 ]

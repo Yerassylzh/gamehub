@@ -14,8 +14,7 @@
   let CLUB_DETAILS = "{% url 'club:club_details' pk %}"
 
   document.addEventListener("click", e => {
-    let isLeftImg = e.target.matches("[data-left-img]")
-    if (!isLeftImg) return
+    if (!e.target.matches("[data-left-img]") && e.target.closest("[data-left-img]") == null) return
 
     $.ajax({
       method: "POST",
@@ -36,8 +35,7 @@
   })
 
   document.addEventListener("click", e => {
-    let isRightImg = e.target.matches("[data-right-img]")
-    if (!isRightImg) return
+    if (!e.target.matches("[data-right-img]") && e.target.closest("[data-right-img]") == null) return
 
     $.ajax({
       method: "POST",

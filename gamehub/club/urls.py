@@ -5,7 +5,7 @@ from club import views
 app_name = "club"
 
 urlpatterns = [
-    path("", views.home, name="homepage"),
-    path("my_bookings/", views.bookings, name="my_bookings"),
-    path("club_details/<int:pk>/", views.club_details, name="club_details"),
+    path("", views.HomepageView.as_view(), name="homepage"),
+    path("my_bookings/", views.BookingsView.as_view(), name="my_bookings"),
+    path("club_details/<int:pk>/", views.ClubDetailsView.as_view(), name="club_details"),
 ]

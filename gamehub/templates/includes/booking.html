@@ -1,4 +1,30 @@
 <div class="content-section-wrapper">
   <p class="content-title">Бронирование</p>
-  <button class="booking-btn">Забранировать</button>
+  <button id="booking-btn" class="booking-btn">Забронировать</button>
 </div>
+
+<style>
+  .booking-btn {
+    white-space: nowrap;
+    width: fit-content;
+    
+    background-color: rgb(240, 10, 10);
+
+    outline: none;
+    border: none;
+    border-radius: 0.8rem;
+    padding: .625rem 1.875rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 0 8px rgba(220, 0, 0, 0.5);
+
+    color: white;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  .booking-btn:hover {
+    box-shadow: 0 2px 10px rgba(220, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+</style>

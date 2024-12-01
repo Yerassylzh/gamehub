@@ -1,10 +1,10 @@
 document.addEventListener("click", e => {
-    if (!e.target.matches("#my-bookings")) return
+    if (!e.target.matches("#my-bookings") && e.target.closest("#my-bookings") == null) return
     window.location.href = MYBOOKINGS_URL
 })
 
 document.addEventListener("click", e => {
-    if (!e.target.matches("#logout-btn")) return
+    if (!e.target.matches("#logout-btn") && e.target.closest("#logout-btn") == null) return
 
     $.ajax({
         method: "POST",

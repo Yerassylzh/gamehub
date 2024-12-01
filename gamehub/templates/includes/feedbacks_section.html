@@ -1,35 +1,196 @@
 {% load static %}
 
-<div class="content-section-wrapper">
+<div class="content-section-wrapper" id="content-section-wrapper">
   <p class="content-title">Отзывы</p>
-  <div class="content-section">
-    <div class="row">
-      {% for feedback in feedbacks %}
-        <div class="col-5 col-md-4 col-xl-3">
-          <p class="feedback-name">{{ feedback.name }}</p>
-          
+  <div class="row">
+    {% for feedback in feedbacks %}
+      <div class="col-7 col-md-5 col-xl-5">
+        <div class="content-section">  
+          <div class="name-and-date-wrapper">
+            <p class="feedback-name">{{ feedback.name }}</p>
+            <p class="feedback-date">{{ feedback.date }}</p>
+          </div>
+
           <div class="rating-wrapper">
             {% for _ in feedback.full_star_inds %}
-            <div class="col-1 col-md-1 col-xl-1">
-              <img src="{% static 'img/star_full.png' %}" class="star img-fluid">
-            </div>
+              <img src="{% static 'img/star_full.png' %}" class="star-img">
             {% endfor %}
         
             {% for _ in feedback.empty_star_inds %}
-              <div class="col-1 col-md-1 col-xl-1">
-                <img src="{% static 'img/star_empty.png' %}" class="star img-fluid">
-              </div>
+                <img src="{% static 'img/star_empty.png' %}" class="star-img">
             {% endfor %}
           </div>
 
-          <p class="feedback-date">{{ feedback.date }}</p>
-
           <p class="feedback-text">{{ feedback.text }}</p>
         </div>
-      {% empty %}
-        <p class="no-feedback">Станьте первым!</p>
-      {% endfor %}
-    </div>
+      </div>
+    {% empty %}
+      <p class="no-feedback">Станьте первым!</p>
+    {% endfor %}  
   </div>
-  <button class="create-feedback" id="create-feedback">Оставить отзыв</button>
+  <button class="create-feedback-btn" id="create-feedback-btn">Оставить отзыв</button>
 </div>
+
+<style>
+  .feedback-text {
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+
+    margin: 0;
+    margin-top: 1rem;
+    
+    padding: 0;
+  }
+
+  .name-and-date-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .feedback-date {
+    padding: 0;
+    margin: 0;
+
+    font-family: Inter, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+
+    color: rgb(220, 220, 220);
+  }
+
+  .feedback-name {
+    padding: 0;
+    margin: 0;
+
+    font-family: Inter, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .rating-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    margin: 0;
+    margin-top: 0.3rem;
+    padding: 0;
+  }
+
+  .content-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1rem;  
+  }
+
+  .feedback-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .feedback-input {
+    border: none;
+    outline: none;
+
+    background-color: white;
+    box-shadow: 0 0 16px rgba(153, 153, 153, 0.25);
+
+    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+    
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+    justify-content: flex-start;
+
+    font-family: Inter, sans-serif;
+
+    font-weight: 400;
+    font-size: 0.8rem;
+    
+    margin: 0;
+  }
+
+  textarea {
+    scrollbar-width: thin; /* Makes the scrollbar thinner */
+    scrollbar-color: darkgrey #f1f1f1; /* Thumb color and track color */
+  }
+
+  .no-feedback {
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .create-feedback-btn {
+    white-space: nowrap;
+    width: fit-content;
+    
+    background-color: rgb(240, 10, 10);
+
+    outline: none;
+    border: none;
+    border-radius: 0.8rem;
+    padding: .625rem 1.875rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 0 8px rgba(220, 0, 0, 0.5);
+
+    color: white;
+
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  .create-feedback-btn:hover {
+    box-shadow: 0 2px 10px rgba(220, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .save-feedback-btn {
+    white-space: nowrap;
+    
+    background-color: rgb(240, 10, 10);
+
+    outline: none;
+    border: none;
+    border-radius: 0.8rem;
+    padding: .625rem 1.875rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 0 8px rgba(220, 0, 0, 0.5);
+
+    color: white;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  .save-feedback-btn {
+    box-shadow: 0 2px 10px rgba(220, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+</style>

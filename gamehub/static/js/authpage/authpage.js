@@ -1,7 +1,8 @@
 document.addEventListener("click", e => {
-    if (!e.target.matches("#auth-submit")) return
+    if (!e.target.matches("#auth-submit") && e.target.closest("#auth-submit") == null) return
     let username = $("#username").val()
     let password = $("#password").val()
+
     $.ajax({
         method: "POST",
         url: AUTHPAGE_URL,
@@ -10,6 +11,7 @@ document.addEventListener("click", e => {
             "password": password,
             "remember_me": $("#remember-me").val() == "on",
             "action": "auth-user",
+            "auth_type": document.getElementById("auth-type-wrapper").getAttribute("auth_type"),
             "csrfmiddlewaretoken": CSRF_TOKEN,
         },
         dataType: "json",
@@ -24,9 +26,9 @@ document.addEventListener("click", e => {
                 errorMessage.hide().fadeIn(300);
 
                 setTimeout(function() {
-                        errorMessage.fadeOut(300, function() {
-                                $(this).remove();
-                        });
+                    errorMessage.fadeOut(300, function() {
+                            $(this).remove();
+                    });
                 }, displayDuration);
             
             } else if (data["success"]) {
@@ -42,27 +44,16 @@ document.addEventListener("click", e => {
 })
 
 document.addEventListener("click", e => {
-    if (!e.target.matches(".auth-option-button")) return
-    $.ajax({
-        method: "POST",
-        url: AUTHPAGE_URL,
-        data: {
-            "action": "change-auth-type",
-            "auth-type": $(".auth-option-button").data("auth-type"),
-            "csrfmiddlewaretoken": CSRF_TOKEN,
-        },
-        dataType: "json",
-        success: function(data) {
-            if (data["auth_option"] == 0) {
-                $("#auth-login").removeClass().addClass("auth-option-button-selected");
-                $("#auth-signup").removeClass().addClass("auth-option-button");
-            } else {
-                $("#auth-login").removeClass().addClass("auth-option-button");
-                $("#auth-signup").removeClass().addClass("auth-option-button-selected");
-            }
-        },
-        error: function(xhr, errmsg, err) {
-                console.log(xhr.status + ":" + xhr.responseText)
-        }
-    })
+    if (!e.target.matches("#auth-type-wrapper") && e.target.closest("#auth-type-wrapper") == null) return
+    
+    auth_btns_wrapper = document.getElementById("auth-type-wrapper")
+    if (e.target.matches("#auth-login")) {
+        $("#auth-login").removeClass().addClass("auth-option-button-selected");
+        $("#auth-signup").removeClass().addClass("auth-option-button");
+        auth_btns_wrapper.setAttribute("auth_type", "0")
+    } else {
+        $("#auth-login").removeClass().addClass("auth-option-button");
+        $("#auth-signup").removeClass().addClass("auth-option-button-selected");
+        auth_btns_wrapper.setAttribute("auth_type", "1")
+    }
 })
