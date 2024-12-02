@@ -1,27 +1,27 @@
 {% load static %}
 
-<div class="content-section-wrapper">
+<div class="content-section">
   <p class="content-title">Контактные данные</p>
-  <div class="content-section">
-    <div class="club-contact-option">
-      <img src="{% static 'img/location.png' %}" alt="addr" class="club-contact-option-icon">
-      <p class="club-contact-option-text">{{ club.contact.address }}</p>
+  <div class="content-bar">
+    <div class="contact-option">
+      <img src="{% static 'img/location.png' %}" alt="addr" class="contact-option-icon">
+      <p class="contact-option-text">{{ club.contact.address }}</p>
     </div>
     
-    <div class="club-contact-option">
-      <img src="{% static 'img/phone.png' %}" alt="phone" class="club-contact-option-icon">
-      <p class="club-contact-option-text">{{ club.contact.phone_number }}</p>
+    <div class="contact-option">
+      <img src="{% static 'img/phone.png' %}" alt="phone" class="contact-option-icon">
+      <p class="contact-option-text">{{ club.contact.phone_number }}</p>
     </div>
 
-    <div class="club-contact-option">
-      <img src="{% static 'img/email.png' %}" alt="email" class="club-contact-option-icon">
-      <p class="club-contact-option-text">{{ club.contact.email }}</p>
+    <div class="contact-option">
+      <img src="{% static 'img/email.png' %}" alt="email" class="contact-option-icon">
+      <p class="contact-option-text">{{ club.contact.email }}</p>
     </div>
   </div>
 </div>
 
 <style>
-  .club-contact-option {
+  .contact-option {
     display: flex;
     flex-direction: row;
     padding: 0;
@@ -32,7 +32,7 @@
     overflow: hidden;
   }
 
-  .club-contact-option-icon {
+  .contact-option-icon {
     width: 26px;
     height: 26px;
 
@@ -40,7 +40,7 @@
     margin: 0;
   }
 
-  .club-contact-option-text {
+  .contact-option-text {
     font-family: Inter, sans-serif;
 
     font-weight: 400;

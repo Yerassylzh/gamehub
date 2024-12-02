@@ -1,17 +1,17 @@
 {% load static %}
 
-<div class="content-section-wrapper" id="content-section-wrapper">
+<div class="content-section" id="content-section">
   <p class="content-title">Отзывы</p>
   <div class="row">
     {% for feedback in feedbacks %}
       <div class="col-7 col-md-5 col-xl-5">
-        <div class="feedback-section">  
+        <div class="feedback-bar">  
           <div class="name-and-date-wrapper">
             <p class="feedback-name">{{ feedback.name }}</p>
             <p class="feedback-date">{{ feedback.date }}</p>
           </div>
 
-          <div class="rating-wrapper">
+          <div class="rating-container">
             {% for _ in feedback.full_star_inds %}
               <img src="{% static 'img/star_full.png' %}" class="star-img">
             {% endfor %}
@@ -32,7 +32,7 @@
 </div>
 
 <style>
-  .feedback-section {
+  .feedback-bar {
     background-color: white;
     box-shadow: 0 0 16px rgba(153, 153, 153, 0.25);
 
@@ -99,7 +99,7 @@
     font-weight: 600;
   }
 
-  .rating-wrapper {
+  .rating-container {
     display: flex;
     flex-direction: row;
 
@@ -112,7 +112,7 @@
     padding: 0;
   }
 
-  .content-section-wrapper {
+  .content-section {
     display: flex;
     flex-direction: column;
     align-items: space-between;

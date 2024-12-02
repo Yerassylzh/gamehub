@@ -244,6 +244,9 @@ class ClubDetailsView(View):
 
         return sorted(list(free_time_intervals))
 
+    def get_free_computer_orders(self, request, club) -> list:
+        return list(range(100))
+
     def save_feedback(self, username: str, feedback_message: str, feedback_rating: int, club: Club):
         Feedback.objects.create(name=username, text=feedback_message, rating=feedback_rating, club=club)
 
@@ -264,6 +267,13 @@ class ClubDetailsView(View):
             free_time_intervals = self.get_free_time_intervals(request, club)
             context = {
                 "time_intervals": free_time_intervals,
+            }
+            return JsonResponse(data=context)
+
+        elif request.POST.get("action") == "get-free-computers":
+            free_computers = self.get_free_computer_orders(request, club)
+            context = {
+                "computer_orders": free_computers,
             }
             return JsonResponse(data=context)
 

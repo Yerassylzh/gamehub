@@ -68,7 +68,7 @@
       feedbackInputWrapper.appendChild(feedbackInput)
       feedbackInputWrapper.appendChild(saveFeedbackButton)
 
-      let contentSectionWrapper = document.getElementById("content-section-wrapper")
+      let contentSectionWrapper = document.getElementById("content-bar-wrapper")
       contentSectionWrapper.appendChild(feedbackInputWrapper)
     })
 
@@ -91,7 +91,7 @@
           let feedbackInputWrapper = document.getElementById("feedback-input-wrapper")
           feedbackInputWrapper.remove()
 
-          let contentSectionWrapper = document.getElementById("content-section-wrapper")
+          let contentSectionWrapper = document.getElementById("content-bar-wrapper")
 
           let statusMessage = document.createElement("p")
           statusMessage.setAttribute("class", "success-message")
@@ -115,7 +115,7 @@
         error: function(xhr, errmsg, err) {
           current_rating = 0;
 
-          let contentSectionWrapper = document.getElementById("content-section-wrapper")
+          let contentSectionWrapper = document.getElementById("content-bar-wrapper")
           
           let feedbackInputWrapper = document.getElementById("feedback-input-wrapper")
           feedbackInputWrapper.remove()
@@ -211,7 +211,7 @@
       color: rgb(240, 0, 0);
     }
 
-    .content-section {
+    .content-bar {
       background-color: white;
       box-shadow: 0 0 16px rgba(153, 153, 153, 0.25);
 

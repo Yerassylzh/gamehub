@@ -1,12 +1,26 @@
 {% load static %}
 
-<div class="content-section-wrapper">
+<div class="content-section">
   <p class="content-title">Описание</p>
-  <div class="content-section">
-    <div class="content">
-      <p class="content-text">
-        {{ club.description }}
-      </p>
-    </div>
+  <div class="content-bar">
+    <p class="description-text">
+      {{ club.description }}
+    </p>
   </div>
 </div>
+
+<style>
+  .description-text {
+    font-family: Inter, sans-serif;
+
+    font-weight: 400;
+    font-size: calc(0.675rem + 0.4vw);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+  }
+</style>
