@@ -1,3 +1,4 @@
+import datetime
 from pathlib import Path
 import json
 
@@ -8,7 +9,7 @@ from django.conf import settings
 from django.forms.models import model_to_dict
 from django.views import View
 
-from club.models import Club, GalleryImage, Feedback
+from club.models import Club, GalleryImage, Feedback, User
 
 
 class HomepageView(View):
@@ -130,7 +131,7 @@ class ClubDetailsView(View):
             .objects
             .filter(pk=pk)
             .select_related("main_image", "contact")
-            .prefetch_related("gallery_images", "feedbacks")
+            .prefetch_related("gallery_images", "feedbacks", "bookings")
         )
 
     def get_feedbacks_data(self, club: Club, pk: int) -> list:
@@ -218,6 +219,31 @@ class ClubDetailsView(View):
             else:
                 return prev_gallery_image.image.url
 
+    def get_free_time_intervals(self, request: HttpRequest, club) -> list:
+        year = int(request.POST.get("year"))
+        month = int(request.POST.get("month"))
+        day = int(request.POST.get("day"))
+        date = datetime.date(year=year, month=month, day=day)
+        
+        bookings = club.bookings.all().filter(date=date)
+        if len(bookings) == 0:
+            return [(i, (i + 1) % 24) for i in range(24)]
+        
+        time_interval_to_computers_booked = dict()
+        for booking in bookings:
+            for time_interval in booking.hours:
+                if time_interval not in time_interval_to_computers_booked:
+                    time_interval_to_computers_booked[time_interval] = 0
+                time_interval_to_computers_booked[time_interval] += 1
+        
+
+        free_time_intervals = set([(i, (i + 1) % 24) for i in range(24)]) # time intervals, when there's at least one free computer
+        for time_interval, computers_booked in time_interval_to_computers_booked:
+            if computers_booked == club.number_of_computers:
+                free_time_intervals.remove(time_interval)
+
+        return sorted(list(free_time_intervals))
+
     def save_feedback(self, username: str, feedback_message: str, feedback_rating: int, club: Club):
         Feedback.objects.create(name=username, text=feedback_message, rating=feedback_rating, club=club)
 
@@ -233,6 +259,13 @@ class ClubDetailsView(View):
         elif request.POST.get("action") == "save-feedback":
             self.save_feedback(request.session.get("username"), request.POST.get("feedback_message"), request.POST.get("feedback_rating"), club)
             return JsonResponse(data={})
+        
+        elif request.POST.get("action") == "save-date":
+            free_time_intervals = self.get_free_time_intervals(request, club)
+            context = {
+                "time_intervals": free_time_intervals,
+            }
+            return JsonResponse(data=context)
 
         else:
             raise Exception("Cannot find the purpose of ajax request")

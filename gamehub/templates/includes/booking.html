@@ -1,4 +1,6 @@
-<div class="content-section-wrapper">
+{% load static %}
+
+<div class="content-section-wrapper" id="booking-btn-wrapper">
   <p class="content-title">Бронирование</p>
   <button id="booking-btn" class="booking-btn">Забронировать</button>
 </div>
@@ -28,3 +30,122 @@
     transition: box-shadow 0.3s ease;
   }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+  document.addEventListener("click", e => {
+    if (!e.target.matches("#booking-btn") && e.target.closest("#booking-btn") == null) return
+
+    let bookingButton = document.getElementById("booking-btn")
+    bookingButton.remove()
+    
+    let bookingBtnWrapper = document.getElementById("booking-btn-wrapper")
+    
+    let dateInput = document.createElement("input")
+    dateInput.setAttribute("type", "date")
+    dateInput.setAttribute("id", "date-picker-input")
+    dateInput.setAttribute("class", "date-picker-input")
+    bookingBtnWrapper.appendChild(dateInput)
+
+    let dateSelectedButton = document.createElement("button")
+    dateSelectedButton.setAttribute("class", "date-selected")
+    dateSelectedButton.setAttribute("id", "date-selected")
+    dateSelectedButton.textContent = "Далее"
+    bookingBtnWrapper.appendChild(dateSelectedButton)
+  })
+
+  document.addEventListener("click", e => {
+    if (!e.target.matches("#date-selected") && e.target.closest("#date-selected") == null) return
+
+    let bookingBtnWrapper = document.getElementById("booking-btn-wrapper")
+    if (document.getElementById("date-picker-input").value === "") {
+      let message = document.createElement("p")
+      message.setAttribute("class", "error-message")
+      message.setAttribute("id", "invalid-date-msg")
+      message.textContent = "Введите валидную дату"
+
+      setTimeout(() => {
+        message.style.opacity = 0
+        setTimeout(() => {
+          message.remove()
+        }, 200);
+      }, 2000);
+
+      let bookingBtn = document.getElementById("date-selected")
+      bookingBtnWrapper.insertBefore(message, bookingBtn)
+    }
+    
+    let [year, month, day] = document.getElementById("date-picker-input").value.split("-")
+
+    $.ajax({
+      method: "POST",
+      url: CLUB_DETAILS_URL,
+      data: {
+        "csrfmiddlewaretoken": CSRF_TOKEN,
+        "action": "save-date",
+        "year": year,
+        "month": month,
+        "day": day,
+      },
+      dateType: "json",
+      success: data => {
+        let timeIntervalBtnsWrapper = document.createElement("div")
+        timeIntervalBtnsWrapper.setAttribute("class", "row time-intervals-wrapper")
+
+        if (data["time_intervals"].length == 0) {
+          let bookingBtnWrapper = document.getElementById("booking-btn-wrapper")
+          let message = document.createElement("p")
+          message.setAttribute("class", "error-message")
+          message.setAttribute("id", "computers-not-found-message")
+          message.textContent = "Очень забитый график, попробуйте позже"
+
+          setTimeout(() => {
+            message.style.opacity = 0
+            setTimeout(() => {
+              message.remove()
+            }, 200);
+          }, 2000);
+
+          let bookingBtn = document.getElementById("date-selected")
+          bookingBtnWrapper.insertBefore(message, bookingBtn)
+        }
+
+        for (let i = 0; i < data["time_intervals"].length; i++) {
+          let timeIntervalBtn = document.createElement("button")
+          timeIntervalBtn.setAttribute("id", "time-interval-btn-" + data["time_intervals"][i][0].toString())
+          timeIntervalBtn.setAttribute("class", "time-interval-btn")
+          timeIntervalBtn.textContent = data["time_intervals"][i][0].toString() + ":00 - " + data["time_intervals"][i][1].toString() + ":00"
+          timeIntervalBtnsWrapper.appendChild(timeIntervalBtn)
+        }
+
+        document.getElementById("date-selected").remove()
+
+        let contentSectionWrapper = document.getElementById("booking-btn-wrapper")
+        contentSectionWrapper.appendChild(timeIntervalBtnsWrapper)
+
+        let nextButtton = document.createElement("button")
+        nextButtton.setAttribute("id", "save-time-interval")
+        nextButtton.textContent = "Далее"
+        contentSectionWrapper.appendChild(nextButtton)
+      },
+      error: (xhr, errmsg, err) => {
+        let bookingBtnWrapper = document.getElementById("booking-btn-wrapper")
+        let message = document.createElement("p")
+        message.setAttribute("class", "error-message")
+        message.setAttribute("id", "date-error-message")
+        message.textContent = "Произошла ошибка"
+
+        setTimeout(() => {
+          message.style.opacity = 0
+          setTimeout(() => {
+            message.remove()
+          }, 200);
+        }, 2000);
+
+        let bookingBtn = document.getElementById("date-selected")
+        bookingBtnWrapper.insertBefore(message, bookingBtn)
+      }
+    })
+  })
+</script>
