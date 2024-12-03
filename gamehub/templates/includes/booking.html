@@ -6,6 +6,60 @@
 </div>
 
 <style>
+  .commit-booking {
+    white-space: nowrap;
+    width: fit-content;
+    
+    background-color: rgb(240, 10, 10);
+
+    outline: none;
+    border: none;
+    border-radius: 0.8rem;
+    padding: .625rem 1.875rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 0 8px rgba(220, 0, 0, 0.5);
+
+    color: white;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  .commit-booking:hover {
+    box-shadow: 0 2px 10px rgba(220, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .free-computers-text {
+    font-size: 1.2rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+
+    padding: 0;
+    margin: 0;
+  }
+
+  .computer-btn {
+    margin: 0;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    padding: 0.2rem;
+    outline: none;
+
+    border: 0.01rem solid rgb(200, 200, 200);
+    border-radius: 0.5rem;
+
+    font-family: Inter, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+  
+    width: 100%;
+  }
+
+  .active-computer-btn {
+    border: 0.01rem solid rgb(220, 50, 50) !important;
+  }
+
   input[type="date"] {
     appearance: none;
     -webkit-appearance: none;
@@ -54,6 +108,8 @@
     font-family: Inter, sans-serif;
     font-size: 0.9rem;
     font-weight: 400;
+
+    width: 100%;
   }
 
   .booking-btn {
@@ -86,11 +142,11 @@
 <script>
   let current_booking_date = [-1, -1, -1]
   let current_time_intervals = []
+  let current_computer_orders = []
 
-  function get_error_p(id, content) {
+  function get_error_p(content) {
     let message = document.createElement("p")
     message.setAttribute("class", "error-message")
-    message.setAttribute("id", id)
     message.textContent = content
     setTimeout(() => {
       message.style.opacity = 0
@@ -101,10 +157,9 @@
     return message
   }
 
-  function get_success_p(id, content) {
+  function get_success_p(content) {
     let message = document.createElement("p")
     message.setAttribute("class", "success-message")
-    message.setAttribute("id", id)
     message.textContent = content
     setTimeout(() => {
       message.style.opacity = 0
@@ -113,6 +168,12 @@
       }, 200);
     }, 2000);
     return message
+  }
+
+  function removeAll(attrName) {
+    document.querySelectorAll(attrName).forEach(item => {
+      item.remove()
+    })
   }
 
   document.addEventListener("click", e => {
@@ -136,10 +197,12 @@
   })
 
   document.addEventListener("change", e => {
+    if (!e.target.matches("#date-picker-input") && e.target.closest("#date-picker-input") == null) return
+
     let bookingSection = document.getElementById("booking-section")
     if (document.getElementById("date-picker-input").value === "") {
       bookingSection.appendChild(
-        get_error_p("invalid-date-msg", "Введите валидную дату"),
+        get_error_p("Введите валидную дату"),
       )
     }
     
@@ -162,12 +225,13 @@
         if (data["time_intervals"].length == 0) {
           let bookingSection = document.getElementById("booking-section")
           bookingSection.appendChild(
-            get_error_p("computers-not-found-msg", "Очень забитый график, попробуйте позже"),
+            get_error_p("Очень забитый график, попробуйте позже"),
           )
         }
 
         let rowDiv = document.createElement("div")
         rowDiv.setAttribute("class", "row")
+        rowDiv.setAttribute("id", "time-intervals-row")
 
         for (let i = 0; i < data["time_intervals"].length; i++) {
           let timeIntervalBtnWrapper = document.createElement("div")
@@ -189,12 +253,12 @@
         let bookingSection = document.getElementById("booking-section")
       
         bookingSection.appendChild(
-          get_error_p("date-error-msg", "Произошла ошибка"),
+          get_error_p("Произошла ошибка"),
         )
       }
     })
   })
-
+  
   document.addEventListener("click", e => {
     if (!e.target.matches(".time-interval") && e.target.closest(".time-interval") == null) return
 
@@ -202,22 +266,19 @@
     let startHour = parseInt(e.target.id.split("-")[e.target.id.split("-").length - 1])
     if (button.classList.contains("active-time-interval")) {
       button.classList.remove("active-time-interval")
-      current_time_intervals = current_time_intervals.filter(item => item !== startHour)
+      current_time_intervals = current_time_intervals.filter(item => item[0] !== startHour)
     }
     else {
       button.classList.toggle("active-time-interval")
-      current_time_intervals.push(startHour)
+      current_time_intervals.push([startHour, (startHour + 1) % 24])
     }
-
+  
     if (current_time_intervals.length == 0) {
-      document.querySelectorAll(".free-computers-text").forEach(item => {
-        item.remove()
-      })
-      document.querySelectorAll("#free-computers-row").forEach(item => {
-        item.remove()
-      })
+      removeAll(".free-computers-text")
+      removeAll("#free-computers-row")
+      removeAll("#commit-booking")
 
-      document.getElementById("booking-section").appendChild(get_error_p("none", "Не найдено свобоных компьютеров"))
+      document.getElementById("booking-section").appendChild(get_error_p("Не найдено свобоных компьютеров"))
       return
     }
 
@@ -227,20 +288,19 @@
       data: {
         "csrfmiddlewaretoken": CSRF_TOKEN,
         "action": "get-free-computers",
-        "time_intervals": current_time_intervals,
-        "current_booking_date": current_booking_date
+        "time_intervals": current_time_intervals.flat(),
+        "booking_year": current_booking_date[0],
+        "booking_month": current_booking_date[1],
+        "booking_day": current_booking_date[2],
       },
       dateType: "json",
       success: data => {
-        document.querySelectorAll(".free-computers-text").forEach(item => {
-          item.remove()
-        })
-        document.querySelectorAll("#free-computers-row").forEach(item => {
-          item.remove()
-        })
+        removeAll(".free-computers-text")
+        removeAll("#free-computers-row")
+        removeAll("#commit-booking")
 
         if (data["computer_orders"].length == 0) {
-          document.getElementById("booking-section").appendChild(get_error_p("none", "Не найдено свобоных компьютеров"))
+          document.getElementById("booking-section").appendChild(get_error_p("Не найдено свобоных компьютеров"))
           return
         }
 
@@ -248,16 +308,13 @@
 
         let freeComputersText = document.createElement("p")
         freeComputersText.setAttribute("class", "free-computers-text")
+        freeComputersText.setAttribute("id", "free-computers-text")
         freeComputersText.textContent = "Свободные компьютеры"
         bookingSection.appendChild(freeComputersText)
 
         let rowDiv = document.createElement("div")
         rowDiv.setAttribute("class", "row")
         rowDiv.setAttribute("id", "free-computers-row")
-
-        let computerBtns = document.createElement("div")
-
-        console.log(data["computer_orders"])
 
         for (let i = 0; i < data["computer_orders"].length; i++) {
           let computerBtnWrapper = document.createElement("div")
@@ -269,16 +326,79 @@
           computerBtn.textContent = data["computer_orders"][i].toString()
 
           computerBtnWrapper.appendChild(computerBtn)
-          computerBtns.appendChild(computerBtnWrapper)
-          rowDiv.appendChild(computerBtns)
+          rowDiv.appendChild(computerBtnWrapper)
         }
 
         document.getElementById("booking-section").appendChild(rowDiv)
+
+        let commitBooking = document.createElement("button")
+        commitBooking.setAttribute("class", "commit-booking")
+        commitBooking.setAttribute("id", "commit-booking")
+        commitBooking.textContent = "Подтвердить"
+        document.getElementById("booking-section").appendChild(commitBooking)
       },
       error: (xhr, errmsg, err) => {
-
+        document.getElementById("booking-section").appendChild(get_error_p("Не найдено свобоных компьютеров"))
       }
     })
   })
 
+  document.addEventListener("click", e => {
+    if (!e.target.matches(".computer-btn") && e.target.closest(".computer-btn") == null) return
+
+    let computerOrder = e.target.id.split("-")[e.target.id.split("-").length - 1]
+    let computerBtn = document.getElementById(e.target.id)
+    if (computerBtn.classList.contains("active-computer-btn")) {
+      computerBtn.classList.remove("active-computer-btn")
+      current_computer_orders = current_computer_orders.filter(item => item !== computerOrder)
+    }
+    else {
+      computerBtn.classList.toggle("active-computer-btn")
+      current_computer_orders.push(computerOrder)
+    }
+  })
+  
+  document.addEventListener("click", e => {
+    if (!e.target.matches("#commit-booking") && e.target.closest("#commit-booking") == null) return
+
+    $.ajax({
+      method: "POST",
+      url: CLUB_DETAILS_URL,
+      data: {
+        "csrfmiddlewaretoken": CSRF_TOKEN,
+        "action": "commit-booking",
+        "time_intervals": current_time_intervals.flat(),
+        "booking_year": current_booking_date[0],
+        "booking_month": current_booking_date[1],
+        "booking_day": current_booking_date[2],
+        "computer_orders": current_computer_orders,
+      },
+      dataType: "json",
+      success: data => {
+        let bookingSection = document.getElementById("booking-section")
+        if (data["has_errors"]) {
+          bookingSection.insertBefore(get_error_p(data["error_message"]), document.getElementById("commit-booking"))
+          return
+        }
+
+        removeAll("#time-intervals-row")
+        removeAll("#free-computers-text")
+        removeAll("#free-computers-row")
+        removeAll("#commit-booking")
+        removeAll("#date-picker-input")
+
+        bookingSection.appendChild(get_success_p("Запись была успешно добавлена"))
+        
+        let createBookingBtn = document.createElement("button")
+        createBookingBtn.setAttribute("id", "booking-btn")
+        createBookingBtn.setAttribute("class", "booking-btn")
+        createBookingBtn.textContent = "Забронировать"
+
+        bookingSection.appendChild(createBookingBtn)
+      },
+      error: (xhr, errmsg, err) => {
+        document.getElementById("booking-section").insertBefore(get_error_p("Произошла ошибка"), document.getElementById("#commit-booking"))
+      }
+    })
+  })
 </script>

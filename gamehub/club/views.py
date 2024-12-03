@@ -8,8 +8,9 @@ from django.urls import reverse
 from django.conf import settings
 from django.forms.models import model_to_dict
 from django.views import View
+from django.db.models.query import QuerySet
 
-from club.models import Club, GalleryImage, Feedback, User
+from club.models import Club, GalleryImage, Feedback, User, Booking
 
 
 class HomepageView(View):
@@ -219,6 +220,7 @@ class ClubDetailsView(View):
             else:
                 return prev_gallery_image.image.url
 
+    # Returns the time intervals, when at least one computer is free
     def get_free_time_intervals(self, request: HttpRequest, club) -> list:
         year = int(request.POST.get("year"))
         month = int(request.POST.get("month"))
@@ -232,9 +234,11 @@ class ClubDetailsView(View):
         time_interval_to_computers_booked = dict()
         for booking in bookings:
             for time_interval in booking.hours:
-                if time_interval not in time_interval_to_computers_booked:
-                    time_interval_to_computers_booked[time_interval] = 0
-                time_interval_to_computers_booked[time_interval] += 1
+                print("HERE1", time_interval_to_computers_booked)
+                print("HERE2", tuple(time_interval))
+                if tuple(time_interval) not in time_interval_to_computers_booked:
+                    time_interval_to_computers_booked[tuple(time_interval)] = 0
+                time_interval_to_computers_booked[tuple(time_interval)] += 1
         
 
         free_time_intervals = set([(i, (i + 1) % 24) for i in range(24)]) # time intervals, when there's at least one free computer
@@ -244,11 +248,56 @@ class ClubDetailsView(View):
 
         return sorted(list(free_time_intervals))
 
-    def get_free_computer_orders(self, request, club) -> list:
-        return list(range(100))
+    def get_free_computer_orders(self, request: HttpRequest, club: Club) -> list:
+        flatten_time_intervals = list(map(int, request.POST.getlist("time_intervals[]")))
+        time_intervals = set(
+            (
+                flatten_time_intervals[i],
+                flatten_time_intervals[i + 1]
+            ) for i in range(0, len(flatten_time_intervals), 2)
+        )
+            
+        free_computers = set(list(range(1, club.number_of_computers + 1)))
+        bookings = club.bookings.all()
+        for booking in bookings:
+            if len(set(map(tuple, booking.hours)) & time_intervals) > 0:
+                if booking.computer_order in free_computers:
+                    free_computers.remove(booking.computer_order)
+
+        return list(sorted(free_computers))
 
     def save_feedback(self, username: str, feedback_message: str, feedback_rating: int, club: Club):
         Feedback.objects.create(name=username, text=feedback_message, rating=feedback_rating, club=club)
+
+    def save_booking(self, request: HttpRequest, club: Club, context: dict) -> list:
+        flatten_time_intervals = list(map(int, request.POST.getlist("time_intervals[]")))
+        time_intervals = set(
+            (
+                flatten_time_intervals[i],
+                flatten_time_intervals[i + 1]
+            ) for i in range(0, len(flatten_time_intervals), 2)
+        )
+        booking_year = int(request.POST.get("booking_year"))
+        booking_month = int(request.POST.get("booking_month"))
+        booking_day = int(request.POST.get("booking_day"))
+        booking_date = datetime.date(year=booking_year, month=booking_month, day=booking_day)
+        computer_orders = request.POST.getlist("computer_orders[]")
+
+        user = User.objects.get(username=request.session.get("username"))
+        early_bookings : QuerySet[Booking] = club.bookings.all().filter(date=booking_date, user=user)
+
+        for computer_order in computer_orders:
+            if early_booking := early_bookings.filter(computer_order=computer_order).first():
+                if len(set(map(tuple, early_booking.hours)) & time_intervals) > 0:
+                    context["has_error"] = True
+                    context["error_message"] = f"Вы уже раннее забранировали место на это время"
+                    return
+                else:
+                    early_booking.hours.extend(time_intervals)
+                    early_booking.save()
+            
+            else:
+                Booking.objects.create(date=booking_date, hours=list(time_intervals), computer_order=computer_order, club=club, user=user)
 
     def handle_ajax(self, request: HttpRequest, context: dict, club: Club) -> JsonResponse:
         if request.POST.get("action") == "get-left-image":
@@ -275,6 +324,11 @@ class ClubDetailsView(View):
             context = {
                 "computer_orders": free_computers,
             }
+            return JsonResponse(data=context)
+
+        elif request.POST.get("action") == "commit-booking":
+            context = dict()
+            self.save_booking(request, club, context)
             return JsonResponse(data=context)
 
         else:
