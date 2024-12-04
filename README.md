@@ -38,19 +38,21 @@ python manage.py loaddata fixtures/data.json
 python manage.py createsuperuser
 ```
 
-### 6. Run the Development Server
-```bash
-python manage.py runserver
-```
-
-### 7. Access the Project
-```bash
-http://127.0.0.1:8000/
-```
-
-### 8. Environment Variables
+### 6. Environment Variables
+#### Create .env file in the current directory
 ```bash
 DJANGO_SECRET_KEY=<PUT HERE YOUR SECRET KEY>
 DJANGO_DEBUG=True
 DJANGO_ALLOWED_HOSTS=127.0.0.1, localhost
+```
+
+### 7. Run the Development Server
+```bash
+cd gamehub
+python manage.py runserver
+```
+
+### 8. Access the Project
+```bash
+http://127.0.0.1:8000/
 ```
