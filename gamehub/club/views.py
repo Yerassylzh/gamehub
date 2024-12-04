@@ -76,7 +76,7 @@ class HomepageView(View):
         return {
             "dropdown_content_options": [
                 {
-                    "text": "Записи",
+                    "text": "Мои записи",
                     "button_id": "my-bookings",
                     "img_name": "gamepad.png",
                 },
@@ -119,8 +119,68 @@ class HomepageView(View):
 
 
 class BookingsView(View):
-    def bookings(request: HttpRequest):
-        pass
+    my_bookings_template_name = "club/my_bookings.html"
+
+    def delete_inactive_bookings(self, user: User):
+        todays_date = datetime.date.today()
+        Booking.objects.filter(date__lt=todays_date).delete()
+
+    def get_dropdown_menu(self) -> dict:
+        return {
+            "dropdown_content_options": [
+                {
+                    "text": "Главная старница",
+                    "button_id": "homepage-btn",
+                    "img_name": "gamehub.png",
+                },
+                {
+                    "text": "Выйти с аккаунта",
+                    "button_id": "logout-btn",
+                    "img_name": "logout.png",
+                },
+            ],
+        }
+
+    def get(self, request: HttpRequest):
+        user = User.objects.get(username=request.session.get("username"))
+    
+        self.delete_inactive_bookings(user=user)
+
+        bookings = (
+            Booking
+            .objects
+            .filter(user=user)
+            .select_related("club")
+            .only(
+                "date",
+                "hours",
+                "computer_order",
+                "club__name",
+            )
+        )
+
+        date_to_club_ids = dict()
+        for booking in bookings:
+            if booking.date not in date_to_club_ids:
+                date_to_club_ids[booking.date] = set()
+            date_to_club_ids[booking.date].add(booking.club.id)
+
+        date_to_clubs = dict()
+        for date, club_ids in date_to_club_ids.items():
+            if date not in date_to_clubs:
+                date_to_clubs[date] = list()
+            for club_id in club_ids:
+                date_to_clubs[date].extend([club for club in Club.objects.filter(pk=club_id)])
+        
+        date_to_clubs_list = [(date, date_to_clubs[date]) for date in date_to_clubs.keys()]
+        date_to_clubs_list.sort()
+
+        context = {
+            "date_to_clubs": date_to_clubs_list,
+            "username": request.session.get("username"),
+        }
+        context.update(self.get_dropdown_menu())
+        return render(request, self.my_bookings_template_name, context)
 
 
 class ClubDetailsView(View):
@@ -157,7 +217,7 @@ class ClubDetailsView(View):
                     "img_name": "gamehub.png",
                 },
                 {
-                    "text": "Запись",
+                    "text": "Мои записи",
                     "button_id": "my-bookings",
                     "img_name": "gamepad.png",
                 },
@@ -356,3 +416,68 @@ class ClubDetailsView(View):
             return self.handle_ajax(request, context, club)
         else:
             raise Exception("Cannot identify the purpose of POST request")
+
+
+class BookingDetails(View):
+    my_booking_details_template_name = "club/my_booking_details.html"
+
+    def get_dropdown_menu(self) -> dict:
+        return {
+            "dropdown_content_options": [
+                {
+                    "text": "Главная старница",
+                    "button_id": "homepage-btn",
+                    "img_name": "gamehub.png",
+                },
+                {
+                    "text": "Мои записи",
+                    "button_id": "my-bookings",
+                    "img_name": "gamepad.png",
+                },
+                {
+                    "text": "Выйти с аккаунта",
+                    "button_id": "logout-btn",
+                    "img_name": "logout.png",
+                },
+            ],
+        }
+
+    def get(self, request: HttpRequest, club_pk: int, date_str: str):
+        date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
+        club = Club.objects.filter(pk=club_pk).select_related("contact").only("contact").first()
+
+        bookings = list()
+        for booking in Booking.objects.filter(club__id=club_pk, date=date):
+            hours = sorted(booking.hours)
+            time_intervals = list()
+            for hour in hours:
+                if len(time_intervals) == 0:
+                    time_intervals.append((hour[0], hour[1]))
+                else:
+                    if time_intervals[-1][1] == hour[0]:
+                        start_time = time_intervals[-1][0]
+                        end_time = hour[1]
+                        time_intervals.pop()
+                        time_intervals.append((start_time, end_time))
+                    else:
+                        time_intervals.append(tuple(hour))
+            
+            time_intervals_str = " & ".join(
+                [f"{time_interval[0]}:00-{time_interval[1]}:00" for time_interval in time_intervals]
+            )
+
+            bookings.append({
+                "computer_order": booking.computer_order,
+                "time_intervals": time_intervals_str,
+            })
+        
+        bookings.sort(key=lambda dct: dct["computer_order"])
+
+        context = {
+            "club": club,
+            "bookings": bookings,
+            "username": request.session.get("username"),
+        }
+        context.update(self.get_dropdown_menu())
+
+        return render(request, self.my_booking_details_template_name, context)

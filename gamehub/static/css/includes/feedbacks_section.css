@@ -1,0 +1,183 @@
+.feedback-bar {
+    background-color: white;
+    box-shadow: 0 0 16px rgba(153, 153, 153, 0.25);
+
+    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    
+    border-radius: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin: 1rem;
+    margin-left: 0;
+    
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    scrollbar-width: 0.4rem;
+  }
+
+  .feedback-text {
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+
+    margin: 0;
+    margin-top: 1rem;
+    
+    padding: 0;
+  }
+
+  .name-and-date-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .feedback-date {
+    padding: 0;
+    margin: 0;
+
+    font-family: Inter, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+
+    color: rgb(220, 220, 220);
+  }
+
+  .feedback-name {
+    padding: 0;
+    margin: 0;
+
+    font-family: Inter, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .rating-container {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    margin: 0;
+    margin-top: 0.3rem;
+    padding: 0;
+  }
+
+  .content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1rem;  
+  }
+
+  .feedback-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .feedback-input {
+    border: none;
+    outline: none;
+
+    background-color: white;
+    box-shadow: 0 0 16px rgba(153, 153, 153, 0.25);
+
+    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+    
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+    justify-content: flex-start;
+
+    font-family: Inter, sans-serif;
+
+    font-weight: 400;
+    font-size: 0.8rem;
+    
+    margin: 0;
+  }
+
+  textarea {
+    scrollbar-width: thin; /* Makes the scrollbar thinner */
+    scrollbar-color: darkgrey #f1f1f1; /* Thumb color and track color */
+  }
+
+  .no-feedback {
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .create-feedback-btn {
+    white-space: nowrap;
+    width: fit-content;
+    
+    background-color: rgb(240, 10, 10);
+
+    outline: none;
+    border: none;
+    border-radius: 0.8rem;
+    padding: .625rem 1.875rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 0 8px rgba(220, 0, 0, 0.5);
+
+    color: white;
+
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  .create-feedback-btn:hover {
+    box-shadow: 0 2px 10px rgba(220, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .save-feedback-btn {
+    white-space: nowrap;
+    
+    background-color: rgb(240, 10, 10);
+
+    outline: none;
+    border: none;
+    border-radius: 0.8rem;
+    padding: .625rem 1.875rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 0 8px rgba(220, 0, 0, 0.5);
+
+    color: white;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  .save-feedback-btn {
+    box-shadow: 0 2px 10px rgba(220, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
+  }

@@ -1,0 +1,124 @@
+.club-card-wrapper {
+    background-color: white;
+    box-shadow: 0 0 .75rem rgba(153, 153, 153, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0!important;
+    padding-right: 0!important;
+    padding-top: 0!important;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10%;
+
+    gap: 10px;
+
+    padding-bottom: 10%;
+}
+
+.more-button-wrapper {
+    width: 100%;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.more-button {
+    outline: none;
+    border: none;
+
+    border: solid rgb(220, 0, 0);
+    border-radius: 20px;
+
+    background-color: white;
+
+    font-weight: 400;
+    font-family: Inter, sans-serif;
+    font-size: calc(0.8rem + 0.6vw);
+
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin-top: 10%;
+
+    color: rgb(220, 0, 0);
+}
+
+.club-name {
+        font-weight: 700;
+        font-size: 1.25rem;
+        font-family: Inter, sans-serif;
+
+        margin: 0;
+        padding: 0;
+}
+
+.club-location-text {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+
+    font-weight: 300;
+    font-family: Inter, sans-serif;
+}
+
+.club-price-text {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+
+    font-weight: 300;
+    font-family: Inter, sans-serif;
+}
+
+.club-card-image {
+        width: 100%; /* Set container width to 100% */
+        position: relative; /* Required for cropping */
+        overflow: hidden; /* Ensures the image is cropped if it's too tall */
+        aspect-ratio: 4 / 3; /* Ensures the height is 75% of the width (4:3 ratio) */
+}
+
+.rating-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 5%;
+        padding: 0;
+        margin: 0;
+}
+
+.star {
+        padding: 0;
+        margin: 0;
+}
+
+.address-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 3%;
+        padding: 0;
+        margin: 0;
+        padding-left: 5%;
+}
+
+.cash-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3%;
+    padding: 0;
+    margin: 0;
+    padding-left: 5%;
+}

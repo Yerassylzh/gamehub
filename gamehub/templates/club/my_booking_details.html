@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}
+  <link rel="stylesheet" href="{% static 'css/includes/header.css' %}">
+  <script src="{% static 'js/club/club_details.js' %}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="{% static 'css/club/my_booking_details.css' %}">
+  <link rel="stylesheet" href="{% static 'css/includes/my_bookings_section.css' %}">
+{% endblock %}
+
+{% block header %}  
+	{% include "includes/header.html" %}
+{% endblock header %}
+
+{% block main %}
+  <div class="col-10 col-md-9 col-xl-5 contents">
+    <p class="club-name">{{ club.name }}</p>
+    {% include 'includes/contact_info_section.html' %}
+    {% include 'includes/my_bookings_section.html' %}
+  </div>
+{% endblock %}

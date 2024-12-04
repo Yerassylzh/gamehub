@@ -162,7 +162,6 @@ class Booking(models.Model):
     date = models.DateField(
         verbose_name="дата",
         name="date",
-        auto_now_add=True,
     )
 
     hours = models.JSONField(

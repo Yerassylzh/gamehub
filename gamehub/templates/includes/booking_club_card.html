@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="club-card-wrapper">
+  <p class="club-name">{{ club.name|truncatechars:10 }}</p>
+
+  <a href="{% url 'club:my_booking_details' club.pk date|date:"Y-m-d" %}" style="width: 100%; display: flex; justify-content: center; padding: 0; margin: 0; text-decoration: none;">
+    <button class="more-info-button" id="booking-details-btn">
+      Детали
+    </button>
+  </a>
+	<a href="{% url 'club:club_details' club.pk %}" style="width: 100%; display: flex; justify-content: center; padding: 0; margin: 0; text-decoration: none;">
+    <button class="more-info-button" id="about-club-button">
+      О клубе
+    </button>
+  </a>
+</div>

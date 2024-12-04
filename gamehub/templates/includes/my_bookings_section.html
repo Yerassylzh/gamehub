@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="row content-section">
+  <p class="content-title">Мои записи</p>
+  {% for booking in bookings %}
+    <div class="col-10 col-md-5 col-xl-5 content-bar">
+      <p class="computer-order-text">Компьютер: {{ booking.computer_order }}</p>
+      <p class="booking-time-intervals-text">Время: {{ booking.time_intervals }}</p>
+    </div>
+  {% endfor %}
+</div>

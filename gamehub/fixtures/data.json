@@ -26,7 +26,7 @@
     "name": "120FPS",
     "description": "120FPS - кибер-бар, в котором ты сможешь ощутить максимальный уровень комфорта!\r\n\r\nУ нас вы найдете:\r\n· PS5 с сочными ТВ 120 герц (диагональ от 55 до 85 дюймов)\r\n· Закрытые и открытые зоны\r\n· Популярные и новые игры\r\n· Настольные игры\r\n· Еду и напитки\r\n\r\nПриходи, мы ждём тебя!",
     "price": "349 руб в час",
-    "number_of_computers": 100
+    "number_of_computers": 10
   }
 },
 {
@@ -46,7 +46,7 @@
     "name": "BLACKOPS cyber club",
     "description": "BlackOps - Киберспортивный клуб, оснащен мощным железом для современных геймеров, уютными игровыми зонами для индивидуальной или командной игры.\r\n\r\nНаши преимущества:\r\n\r\n✅ Самые мощные компы на процессорах i5 и i7 последних поколений, оперативной памятью ddr5, и мощными видеокартами 3070 и 4070\r\n\r\n✅ Удобный, продуманные игровые столы, кронштейны на всех мониторах, кресла DxRacer, и надежные девайсы для максимального комфорта в играх\r\n\r\n✅ Комфортные просторные игровые зоны с ПК, зонированная обстановка позволяет максимально избежать шума от других комнат, администраторы следят за уровнем шума во всем клубе\r\n\r\n✅ Отдельная VIP-зона (Закрытые комнаты) с огромным 75 дюймовыми телевизором и PlayStation 5, где можно не только играть, но смотреть трансляции или фильмы\r\n\r\n✅ Современная, мощная система вентиляции для максимального комфортного нахождения в помещении долгое время, так же у нас можно курить электронные сигареты\r\n\r\n✅ Большой ассортимент напитков и снеков не заставят геймера отвлекаться от игр долгое время\r\n\r\n✅ Удобное местоположение - нас легко найти, остановка общественного транспорта и парковка в двух шагах\r\n\r\nПриходи и оцени сам лучшее игровое пространство в городе!",
     "price": "110 рублей в час",
-    "number_of_computers": 100
+    "number_of_computers": 10
   }
 },
 {
@@ -97,105 +97,6 @@
     "phone_number": "+79235720120",
     "email": "120fps.krsk@mail.ru",
     "club": 5
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 2,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "Test feedback",
-    "rating": 5,
-    "date": "2024-12-01",
-    "club": 4
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 3,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "fsdfsdf",
-    "rating": 5,
-    "date": "2024-12-01",
-    "club": 4
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 4,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "fjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdffffffffffffffffjfdsfsdfsdfffffffffffffff",
-    "rating": 3,
-    "date": "2024-12-01",
-    "club": 4
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 5,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "fsldjfskdlfjsdlfjkkkkk",
-    "rating": 5,
-    "date": "2024-12-01",
-    "club": 4
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 6,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "fsdfffffffffffffffffff",
-    "rating": 5,
-    "date": "2024-12-01",
-    "club": 4
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 7,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "",
-    "rating": 5,
-    "date": "2024-12-01",
-    "club": 4
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 8,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "fsdffffffffffffff",
-    "rating": 5,
-    "date": "2024-12-01",
-    "club": 1
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 9,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "fsdfsdfsd",
-    "rating": 0,
-    "date": "2024-12-01",
-    "club": 1
-  }
-},
-{
-  "model": "club.feedback",
-  "pk": 10,
-  "fields": {
-    "name": "__yerazh__",
-    "text": "",
-    "rating": 3,
-    "date": "2024-12-01",
-    "club": 1
   }
 },
 {
@@ -388,6 +289,46 @@
   "fields": {
     "username": "__yerazh__",
     "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
+  }
+},
+{
+  "model": "club.booking",
+  "pk": 20,
+  "fields": {
+    "date": "2024-12-05",
+    "hours": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "computer_order": 11,
+    "club": 2,
+    "user": 2
+  }
+},
+{
+  "model": "club.booking",
+  "pk": 21,
+  "fields": {
+    "date": "2024-12-05",
+    "hours": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "computer_order": 10,
+    "club": 2,
+    "user": 2
   }
 }
 ]

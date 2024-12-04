@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block links %}
+	<link rel="stylesheet" href="{% static 'css/includes/header.css' %}">
+	<link rel="stylesheet" href="{% static 'css/includes/club_card.css' %}">
+	<link rel="stylesheet" href="{% static 'css/includes/clubs.css' %}">
+  <script src="{% static 'js/club/club_details.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/club/my_bookings.css' %}">
+  <link rel="stylesheet" href="{% static 'css/includes/booking_club_card.css' %}">
+{% endblock links %}
+
+{% block header %}
+	{% include "includes/header.html" %}
+{% endblock header %}
+
+{% block main %}
+  <div class="row clubs-wrapper">
+    {% for date, clubs in date_to_clubs %}
+      <p class="booking-date-text">{{ date }}</p>
+      {% for club in clubs %}
+        <div class="col-10 col-md-7 col-xl-5">
+          {% include "includes/booking_club_card.html" %}
+        </div>
+      {% endfor %}
+    {% empty %}
+      <p class="booking-date-text">Тут пока ничего нет =(</p>
+    {% endfor %}
+  </div>
+{% endblock main %}
