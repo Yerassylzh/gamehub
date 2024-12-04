@@ -9,16 +9,22 @@ cd gamehub
 ```
 
 ### 2. Create and Activate a Virtual Environment
-# On macOS/Linux
+#### On macOS/Linux
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-# On Windows
+#### On Windows
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
 ### 3. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
 ### 4. Set Up the Database and load fixtures
 ```bash
