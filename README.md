@@ -33,7 +33,7 @@ python manage.py loaddata fixtures/data.json
 ```
 
 ### 5. Create a Superuser
-# Create an admin user to access the Django admin interface.
+#### Create an admin user to access the Django admin interface.
 ```bash
 python manage.py createsuperuser
 ```
