@@ -21,24 +21,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Set Up the Database and load fixtures
-```bash
-python manage.py migrate
-python manage.py loaddata fixtures/data.json
-```
-
-### 5. Create a Superuser
-#### Create an admin user to access the Django admin interface.
-```bash
-python manage.py createsuperuser
-```
-
-### 6. Environment Variables
+### 3. Environment Variables
 #### Create .env file in the current directory
 ```bash
 DJANGO_SECRET_KEY=<PUT HERE YOUR SECRET KEY>
@@ -46,9 +29,26 @@ DJANGO_DEBUG=True
 DJANGO_ALLOWED_HOSTS=127.0.0.1, localhost
 ```
 
-### 7. Run the Development Server
+### 4. Install Dependencies
 ```bash
 cd gamehub
+pip install -r requirements.txt
+```
+
+### 5. Set Up the Database and load fixtures
+```bash
+python manage.py migrate
+python manage.py loaddata fixtures/data.json
+```
+
+### 6. Create a Superuser
+#### Create an admin user to access the Django admin interface.
+```bash
+python manage.py createsuperuser
+```
+
+### 7. Run the Development Server
+```bash
 python manage.py runserver
 ```
 
